@@ -8,8 +8,7 @@ namespace Composition
         {
             var dbMigrator = new DbMigrator(new Logger());
 
-            var logger = new Logger();
-            var installer = new Installer(logger);
+            var installer = new Installer(new Logger());
 
             dbMigrator.Migrate();
 
