@@ -6,6 +6,7 @@ namespace Interfaces_and_Testability
     {
         private readonly IShippingCalculator _shippingCaclulator;
 
+        //references the interface, reducing coupling
         public OrderProcessor(IShippingCalculator shippingCalculator)
         {
             _shippingCaclulator = shippingCalculator; 
