@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Section5_Exercise_1
+namespace Section5_Exercises
 {
     public class SqlConnection : DbConnection
     {
@@ -10,12 +11,13 @@ namespace Section5_Exercise_1
 
         public override string OpenConnection()
         {
-            if (connected == false)
+            if (Connected == false)
             {
                 Console.WriteLine("SQL Connection Opened");
                 Console.WriteLine("It is now {0}", DateTime.Now);
                 Console.WriteLine("Connection will remain open until {0}", DateTime.Now.Add(timer));
-                connected = true;
+
+                Connected = true;
                 return "SQL Opened";
             }
             else
@@ -26,10 +28,10 @@ namespace Section5_Exercise_1
         }
         public override string CloseConnection()
         {
-            if (connected == true)
+            if (Connected == true)
             {
-                Console.Write("SQL Connection Closed");
-                connected = false;
+                Console.WriteLine("SQL Connection Closed");
+                Connected = false;
                 return "SQL Closed";
             }
 
@@ -38,6 +40,12 @@ namespace Section5_Exercise_1
                 Console.WriteLine("Error: Connection already closed");
                 return "Connection already closed";
             }
+        }
+
+        public override string AddDbCommand(string command)
+        {
+            _list.Add(command);
+            return "Command added to SQL Db";
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Section5_Exercise_1
+namespace Section5_Exercises
 {
     public class OracleConnection : DbConnection
     {
@@ -10,12 +10,12 @@ namespace Section5_Exercise_1
         }
         public override string OpenConnection()
         {
-            if (connected == false)
+            if (Connected == false)
             {
                 Console.WriteLine("Oracle Connection Opened");
                 Console.WriteLine("It is now {0}", DateTime.Now);
                 Console.WriteLine("Connection will remain open until {0}", DateTime.Now.Add(timer));
-                connected = true;
+                Connected = true;
                 return "Oracle Opened";
             }
 
@@ -27,10 +27,10 @@ namespace Section5_Exercise_1
         }
         public override string CloseConnection()
         {
-            if (connected == true)
+            if (Connected == true)
             {
-                Console.Write("Oracle Connection Closed");
-                connected = false;
+                Console.WriteLine("Oracle Connection Closed");
+                Connected = false;
                 return "Oracle Closed";
             }
 
@@ -39,6 +39,11 @@ namespace Section5_Exercise_1
                 Console.WriteLine("Error: Connection already closed");
                 return "Connection already closed";
             }
+        }
+        public override string AddDbCommand(string command)
+        {
+            _list.Add(command);
+            return "Command added to Oracle Db";
         }
 
     }
