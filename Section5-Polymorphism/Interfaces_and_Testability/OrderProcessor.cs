@@ -4,11 +4,11 @@ namespace Interfaces_and_Testability
 {
     public class OrderProcessor
     {
-        private readonly ShippingCaclulator _shippingCaclulator;
+        private readonly IShippingCalculator _shippingCaclulator;
 
-        public OrderProcessor()
+        public OrderProcessor(IShippingCalculator shippingCalculator)
         {
-            _shippingCaclulator = new ShippingCaclulator(); 
+            _shippingCaclulator = shippingCalculator; 
         }
 
         public void Process(Order order)
@@ -21,10 +21,10 @@ namespace Interfaces_and_Testability
                 //Create new Shipment object and set values
                 order.Shipment = new Shipment
                 {
-                    Cost = _shippingCaclulator.CaclulateShipping(order),
-                    ShippingDate = DateTime.Today.AddDays(2);
+                    Cost = _shippingCaclulator.CalculateShipping(order),
+                    ShippingDate = DateTime.Today.AddDays(2)
 
-                }
+                };
             }
         }
 
