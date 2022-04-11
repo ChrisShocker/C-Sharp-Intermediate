@@ -19,6 +19,23 @@ namespace Testability_and_Interfaces.UnitTests
             };
             orderProcessor.Process(order);
         }
+
+        [TestMethod]
+        public void Process_OrderIsNotShipped_ShouldSetShipmentPropertyOfOrder()
+        {
+            var orderProcessor = new OrderProcessor(new FakeShippingCalculator());
+
+            //IsShipped bool is false
+            var order = new Order();
+
+            orderProcessor.Process(order);
+
+            //Make sure IsShipped is false
+            Assert.IsTrue(order.IsShipped);
+            Assert.AreEqual(1, order.Shipment.Cost);
+            Assert.AreEqual(DateTime.Today.AddDays(2), order.Shipment.ShippingDate);
+        }
+
     }
 
 
