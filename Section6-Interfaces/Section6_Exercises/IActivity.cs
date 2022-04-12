@@ -1,11 +1,38 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Section6_Exercises
 {
     public interface IActivity
     {
         void Execute();
+    }
+
+    public interface IWorkFLow
+    {
+        void Add(IActivity activity);
+        public IEnumerable<IActivity> GetTasks();
+    }
+
+    public class WorkFlow : IWorkFLow
+    {
+        private readonly IList<IActivity> _activities;
+        public WorkFlow()
+        {
+            _activities = new List<IActivity>();
+        }
+
+        public void Add(IActivity activity)
+        {
+           _activities.Add(activity);    
+        }
+
+        public IEnumerable<IActivity> GetTasks()
+        {
+            return _activities;
+        }
+
     }
 
     public class UploadVideo : IActivity

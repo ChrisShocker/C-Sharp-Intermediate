@@ -1,4 +1,7 @@
-﻿/*
+﻿using System;
+using System.Collections.Generic;
+
+/*
  * Exercise: Design a workflow engine Design a workflow engine that takes a workflow object and runs it. 
  * A workflow is a series of steps or activities. The workflow engine class should have one method called Run() that takes a workflow, 
  * and then iterates over each activity in the workflow and runs it.
@@ -25,20 +28,16 @@
  * We don’t care about the actual activities.
  */
 
+
 namespace Section6_Exercises
 {
-    internal class Program
+    public class WorkFlowEngine
     {
-        static void Main(string[] args)
+        public void Run(WorkFlow workflow)
         {
-            var workflow = new WorkFlow();
-            workflow.Add(new UploadVideo());
-            workflow.Add(new Call());
-            workflow.Add(new SendEmail());
-            workflow.Add(new UpdateStatus());
-
-            var workEngine = new WorkFlowEngine();
-            workEngine.Run(workflow);
+            foreach (IActivity activity in workflow.GetTasks())
+                activity.Execute();
         }
+
     }
 }
